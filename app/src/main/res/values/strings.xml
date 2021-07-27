@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MusicPlayer</string>
+    <string name="CHANNEL_ID">com.tonmoy.gakk.meow.music</string>
+    <string name="CHANNEL_NAME">Music</string>
+    <string name="Description">Only for Music</string>
+</resources>

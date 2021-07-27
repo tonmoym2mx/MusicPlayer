@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="200">
+
+        <OnSwipe motion:touchAnchorId="@+id/playerViewLayout" />
+        <OnClick motion:targetId="@+id/songName" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="60dp"
+            motion:layout_constraintDimensionRatio="1:1"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/cardImageView"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            motion:layout_constraintTop_toTopOf="@+id/playerViewLayout"
+            android:layout_marginTop="16dp" >
+
+        </Constraint>
+        <Constraint
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:id="@+id/songDesc"
+            motion:layout_constraintStart_toEndOf="@+id/cardImageView"
+            android:layout_marginBottom="8dp"
+            motion:layout_constraintBottom_toTopOf="@+id/seekBar"
+            motion:layout_constraintEnd_toStartOf="@+id/playButton"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintEnd_toEndOf="parent">
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+        <Constraint
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@+id/songDesc"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            motion:layout_constraintStart_toEndOf="@+id/cardImageView"
+            android:id="@+id/songName" />
+        <Constraint
+            android:layout_marginEnd="4dp"
+            android:layout_height="15dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="4dp"
+            android:visibility="invisible"
+            android:id="@+id/seekBar" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/songDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@+id/songDesc"
+            motion:layout_constraintStart_toStartOf="@+id/songDesc"
+            android:id="@+id/songName"
+            android:layout_marginStart="0dp">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+        <Constraint
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            motion:layout_constraintBottom_toTopOf="@+id/seekBar"
+            android:id="@+id/songDesc"
+            motion:layout_constraintStart_toEndOf="@+id/cardImageView"
+            motion:layout_constraintEnd_toStartOf="@+id/playButton"
+            android:layout_marginEnd="8dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp" >
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white"/>
+        </Constraint>
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:id="@+id/playButton"
+            motion:layout_constraintTop_toTopOf="@+id/playerViewLayout">
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@android:color/transparent"/>
+        </Constraint>
+        <Constraint
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:id="@+id/playerViewLayout"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+
+            >
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/purple_700" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/songCurrentTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:visibility="invisible"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:layout_marginEnd="24dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@+id/songName"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="24dp"
+            android:visibility="invisible"
+            android:id="@+id/titleText"
+            motion:layout_editor_absoluteY="323dp" />
+        <Constraint
+
+            android:id="@+id/imageButton"
+            android:visibility="invisible"
+             />
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_height="0dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:id="@+id/playerViewLayout"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" >
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/songName">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/songDesc">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/playButton"
+            >
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/purple_700"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="linear" />
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="linear" />
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="cubic(0.17,0.74,0.8,0.8)" />
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="cubic(0.12,1,0.8,0.8)" />
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="cubic(0.12,1,0.85,0)" />
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="cubic(0,1,0.85,0)" />
+
+    </ConstraintSet>
+</MotionScene>
