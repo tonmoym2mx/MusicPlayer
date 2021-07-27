@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/musicListFragment"
-        android:name="com.tonmoy.gakk.meow.musicplayer.ui.music.MusicListFragment"
+        android:name="com.tonmoy.gakk.meow.musicplayer.ui.fragment.music.MusicListFragment"
         android:label="music_list_fragment"
         tools:layout="@layout/music_list_fragment" />
 </navigation>

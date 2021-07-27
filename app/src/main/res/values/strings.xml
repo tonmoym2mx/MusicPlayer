@@ -3,4 +3,5 @@
     <string name="CHANNEL_ID">com.tonmoy.gakk.meow.music</string>
     <string name="CHANNEL_NAME">Music</string>
     <string name="Description">Only for Music</string>
+    <string name="NOTIFICATION_ID">0</string>
 </resources>

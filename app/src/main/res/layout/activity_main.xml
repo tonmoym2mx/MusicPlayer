@@ -2,13 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tonmoy.gakk.meow.musicplayer.ui.activity.MainActivityViewModel" />
+    </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_color"
         app:layoutDescription="@xml/activity_main_xml_main_container_scene2"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.activity.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
@@ -25,6 +31,7 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +40,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
@@ -78,14 +85,21 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragmentContainerView" />
+            app:layout_constraintTop_toTopOf="@+id/fragmentContainerView">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                imageUrl="@{viewModel.currentSong.thumbnail}"
+                android:src="@drawable/cat1"/>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/songName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:text="Meow Meow Meow"
+            tools:text="Meow Meow Meow"
+            nullableText="@{viewModel.currentSong.title}"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/songDesc"
@@ -99,7 +113,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Mr Cat"
+            tools:text="Mr Cat"
+            nullableText="@{viewModel.currentSong.subTitle}"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
