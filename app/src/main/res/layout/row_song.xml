@@ -12,7 +12,6 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:foreground="?selectableItemBackground"
         android:background="@color/background_color">
 

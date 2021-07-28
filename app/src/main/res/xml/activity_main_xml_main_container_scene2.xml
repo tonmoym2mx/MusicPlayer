@@ -6,9 +6,8 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="500">
-
-        <OnSwipe motion:nestedScrollFlags="disableScroll" motion:touchRegionId="@id/playerViewLayout"/>
+        motion:duration="300">
+        <OnSwipe motion:touchRegionId="@id/touchRegion"/>
     </Transition>
 
 
@@ -163,6 +162,14 @@
                 android:visibility="invisible"/>
         </Constraint>
 
+        <Constraint
+            android:id="@+id/touchRegion"
+            android:layout_height="100dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="56dp"
+            />
 
     </ConstraintSet>
 

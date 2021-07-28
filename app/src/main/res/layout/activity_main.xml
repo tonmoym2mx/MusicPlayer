@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
+
         app:layoutDescription="@xml/activity_main_xml_main_container_scene2"
+
         tools:context=".ui.activity.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
@@ -28,6 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appbar"
             app:navGraph="@navigation/main_nav" />
+
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -55,10 +58,23 @@
             android:layout_height="0dp"
             android:background="@color/background_color"
 
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/touchRegion"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/seekBar"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="56dp"
+            />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -135,6 +151,7 @@
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="30dp"
             app:cardElevation="0dp"
+            android:focusable="true"
             android:onClick="@{()->viewModel.toggleSong()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
