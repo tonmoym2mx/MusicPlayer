@@ -6,11 +6,10 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
-import androidx.core.net.toUri
+import android.support.v4.media.session.PlaybackStateCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -64,3 +63,20 @@ fun bitmapFromUri(context:Context,imageUrl:Uri,onBitmap:(Bitmap)->Unit) {
             override fun onLoadCleared(placeholder: Drawable?) = Unit
         })
 }
+
+
+inline val PlaybackStateCompat.isPrepare:Boolean
+    get() = state == PlaybackStateCompat.STATE_BUFFERING ||
+            state == PlaybackStateCompat.STATE_PLAYING ||
+            state == PlaybackStateCompat.STATE_PAUSED
+
+
+inline val PlaybackStateCompat.isPlaying
+    get() = state == PlaybackStateCompat.STATE_BUFFERING ||
+            state == PlaybackStateCompat.STATE_PLAYING
+
+
+
+
+
+

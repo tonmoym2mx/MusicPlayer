@@ -53,7 +53,8 @@
             android:id="@+id/playerViewLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/white"
+            android:background="@color/background_color"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +67,7 @@
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
+            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/titleText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/titleText"
@@ -73,9 +75,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardImageView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="32dp"
             app:cardBackgroundColor="@android:color/darker_gray"
             app:cardCornerRadius="10dp"
@@ -96,15 +99,15 @@
 
         <TextView
             android:id="@+id/songName"
+            nullableText="@{viewModel.currentSong.title}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Meow Meow Meow"
-            nullableText="@{viewModel.currentSong.title}"
-            android:textColor="@color/black"
+            android:textColor="@color/text1_color"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/songDesc"
             app:layout_constraintEnd_toEndOf="@+id/songDesc"
-            app:layout_constraintStart_toStartOf="@+id/songDesc" />
+            app:layout_constraintStart_toStartOf="@+id/songDesc"
+            tools:text="Meow Meow Meow" />
 
         <TextView
             android:id="@+id/songDesc"
@@ -112,8 +115,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             tools:text="Mr Cat"
+            android:textColor="@color/text2_color"
             nullableText="@{viewModel.currentSong.subTitle}"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
@@ -126,21 +130,53 @@
             android:layout_height="60dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="56dp"
+            android:layout_marginBottom="65dp"
             android:clickable="true"
-            app:cardBackgroundColor="@color/purple_700"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="30dp"
             app:cardElevation="0dp"
+            android:onClick="@{()->viewModel.toggleSong()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@android:drawable/ic_media_play" >
             <ImageView
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                playbackStatus="@{viewModel.playbackStatus}"
+                app:tint="@android:color/background_dark"
                 android:src="@drawable/ic_baseline_play_arrow_24"/>
+
         </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/skipNextButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
+            android:foreground="?selectableItemBackground"
+            android:onClick="@{()->viewModel.skipNext()}"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/playButton"
+            app:layout_constraintStart_toEndOf="@+id/playButton"
+            app:layout_constraintTop_toTopOf="@+id/playButton"
+            app:srcCompat="@drawable/ic_baseline_skip_next_24" />
+
+        <ImageButton
+            android:id="@+id/skipPreviousButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?selectableItemBackground"
+            android:onClick="@{()->viewModel.skipToPrevious()}"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/playButton"
+            app:layout_constraintEnd_toStartOf="@+id/playButton"
+            app:layout_constraintTop_toTopOf="@+id/playButton"
+            app:srcCompat="@drawable/ic_baseline_skip_previous_24" />
 
         <SeekBar
             android:id="@+id/seekBar"
@@ -148,6 +184,10 @@
             android:layout_height="15dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
+            android:progressTint="@color/colorPrimary"
+            android:thumbTint="@color/colorPrimary"
+            android:progress="0"
+            playerPosition = "@{viewModel.playerPosition}"
             app:layout_constraintBottom_toTopOf="@+id/songCurrentTime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -157,8 +197,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="32dp"
-            android:text="0:00"
+            android:layout_marginBottom="56dp"
+            android:text="@string/_0_0"
+            currentTime="@{viewModel.playerPosition}"
+            android:textColor="@color/text3_color"
             app:layout_constraintBottom_toTopOf="@+id/playButton"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -167,7 +209,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="0:00"
+            android:text="@string/_0_0"
+            durationTime="@{viewModel.playerPosition}"
+            android:textColor="@color/text3_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
@@ -179,7 +223,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:text="Playing Now"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/playerViewLayout"

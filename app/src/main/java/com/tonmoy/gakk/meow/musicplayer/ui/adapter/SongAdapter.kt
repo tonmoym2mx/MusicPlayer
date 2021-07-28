@@ -8,13 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tonmoy.gakk.meow.musicplayer.data.model.Song
 import com.tonmoy.gakk.meow.musicplayer.databinding.RowSongBinding
 
+typealias SongSelectListener = (Song)->Unit
 class SongAdapter: ListAdapter<Song,SongAdapter.SongViewHolder>(SongDiffCallBack()){
+    private var songSelectListener:SongSelectListener?= null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         return SongViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
+        holder.binding.mainContainer.setOnClickListener {
+            songSelectListener?.invoke(item)
+        }
+    }
+    fun setOnSongSelectListener(songSelectListener:SongSelectListener?){
+        this.songSelectListener = songSelectListener
     }
     fun currentSong(cSong: Song){
         submitList(newList(currentList,cSong))
@@ -30,6 +39,7 @@ class SongAdapter: ListAdapter<Song,SongAdapter.SongViewHolder>(SongDiffCallBack
         fun bind(item: Song){
             binding.song = item
             binding.executePendingBindings()
+
         }
         companion object {
             fun from(parent:ViewGroup): SongViewHolder {
@@ -46,10 +56,7 @@ class  SongDiffCallBack: DiffUtil.ItemCallback<Song>() {
     }
 
     override fun areContentsTheSame(oldItem: Song, newItem: Song): Boolean {
-        println("New "+newItem)
-        println("Old "+oldItem)
        return oldItem == newItem
-        //return false
     }
 
 }

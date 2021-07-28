@@ -12,9 +12,7 @@ import com.tonmoy.gakk.meow.musicplayer.config.AppConfig.MEDIA_SESSION_TAG
 import com.tonmoy.gakk.meow.musicplayer.data.model.Song
 import com.tonmoy.gakk.meow.musicplayer.data.remote.SongFakeApi
 import com.tonmoy.gakk.meow.musicplayer.ui.activity.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 
 import java.util.ArrayList
@@ -43,6 +41,11 @@ class MusicService : MediaBrowserServiceCompat() {
         mediaSessionConnector = MediaSessionConnector(session)
         mediaSessionConnector.setPlayer(exoPlayer)
         mediaSessionConnector.setQueueNavigator(MusicQueueNavigator(session,songs))
+
+        val musicPlaybackPreparer = MusicPlaybackPreparer{
+            changeSong(it)
+        }
+        mediaSessionConnector.setPlaybackPreparer(musicPlaybackPreparer)
         musicNotificationManager = MusicNotificationManager(this,session.sessionToken,
         MusicPlayerNotificationListener(this))
         musicNotificationManager.showNotification(exoPlayer)
@@ -62,21 +65,26 @@ class MusicService : MediaBrowserServiceCompat() {
     override fun onGetRoot(clientPackageName: String,
                            clientUid: Int,
                            rootHints: Bundle?): MediaBrowserServiceCompat.BrowserRoot? {
-        return MediaBrowserServiceCompat.BrowserRoot("root", null)
+        return BrowserRoot("root", null)
     }
 
     override fun onLoadChildren(parentId: String, result: Result<MutableList<MediaItem>>) {
-        fetchSongs()
+        result.detach()
+        fetchSongs(){
+            result.sendResult(songs.toServiceMediaItemMutableList())
+            preparePlayer(false)
+        }
 
-        result.sendResult(songs.toServiceMediaItemMutableList())
-        preparePlayer(true)
     }
-    private fun fetchSongs(){
-        songs.clear()
-        songs.addAll(songApi.fetchSongs())
-        /*serviceScope.launch {
+    private fun fetchSongs(onReady:()->Unit){
+        serviceScope.launch {
+            songs.clear()
+            songs.addAll(songApi.fetchSongs())
+            withContext(Dispatchers.Main){
+                onReady()
+            }
 
-        }*/
+        }
     }
     private fun preparePlayer(isPlay:Boolean){
         exoPlayer.setMediaSource(songs.toDataSource())
@@ -84,4 +92,9 @@ class MusicService : MediaBrowserServiceCompat() {
         exoPlayer.playWhenReady = isPlay
     }
 
+    private fun changeSong(ssong:Song){
+        val index = songs.indexOfFirst { song -> song.id == ssong.id}
+        exoPlayer.seekTo(index,0L)
+        exoPlayer.playWhenReady = true
+    }
 }

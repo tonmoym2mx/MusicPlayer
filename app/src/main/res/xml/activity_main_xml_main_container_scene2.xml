@@ -6,11 +6,10 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="200">
-
-        <OnSwipe motion:touchAnchorId="@+id/playerViewLayout" />
-        <OnClick motion:targetId="@+id/songName" />
+        motion:duration="500">
+        <OnSwipe motion:touchAnchorId="@+id/songName" />
     </Transition>
+
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -48,7 +47,8 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             motion:layout_constraintStart_toEndOf="@+id/cardImageView"
-            android:id="@+id/songName" />
+            android:id="@+id/songName"
+            motion:transitionEasing="cubic(0,0.85,0.84,0.39)" />
         <Constraint
             android:layout_marginEnd="4dp"
             android:layout_height="15dp"
@@ -57,8 +57,10 @@
             android:layout_width="0dp"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="4dp"
-            android:visibility="invisible"
-            android:id="@+id/seekBar" />
+            android:id="@+id/seekBar">
+            <PropertySet
+                android:visibility="invisible"/>
+        </Constraint>
         <Constraint
             motion:layout_constraintEnd_toEndOf="@+id/songDesc"
             android:layout_width="0dp"
@@ -88,8 +90,8 @@
         </Constraint>
         <Constraint
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -97,7 +99,23 @@
             motion:layout_constraintTop_toTopOf="@+id/playerViewLayout">
             <CustomAttribute
                 motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@android:color/transparent"/>
+                motion:customColorValue="@color/white"/>
+            <CustomAttribute
+                motion:attributeName="cardCornerRadius"
+                motion:customDimension="1dp"/>
+
+        </Constraint>
+        <Constraint
+            android:id="@+id/skipNextButton"
+            >
+            <PropertySet
+                android:visibility="invisible"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/skipPreviousButton"
+            >
+            <PropertySet
+                android:visibility="invisible"/>
         </Constraint>
         <Constraint
             android:layout_width="0dp"
@@ -117,9 +135,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:visibility="invisible"
+
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent" />
+            motion:layout_constraintBottom_toBottomOf="parent">
+            <PropertySet
+                android:visibility="invisible"/>
+        </Constraint>
         <Constraint
             android:layout_marginEnd="24dp"
             android:layout_height="wrap_content"
@@ -128,14 +149,18 @@
             android:layout_width="wrap_content"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="24dp"
-            android:visibility="invisible"
             android:id="@+id/titleText"
-            motion:layout_editor_absoluteY="323dp" />
+            motion:layout_editor_absoluteY="323dp" >
+            <PropertySet
+                android:visibility="invisible"/>
+        </Constraint>
         <Constraint
 
             android:id="@+id/imageButton"
-            android:visibility="invisible"
-             />
+             >
+            <PropertySet
+                android:visibility="invisible"/>
+        </Constraint>
 
 
     </ConstraintSet>
@@ -151,20 +176,20 @@
             motion:layout_constraintTop_toTopOf="parent" >
             <CustomAttribute
                 motion:attributeName="backgroundColor"
-                motion:customColorValue="@color/white" />
+                motion:customColorValue="@color/background_color" />
         </Constraint>
 
         <Constraint
             android:id="@+id/songName">
             <CustomAttribute
                 motion:attributeName="textColor"
-                motion:customColorValue="@color/black" />
+                motion:customColorValue="@color/text1_color" />
         </Constraint>
         <Constraint
             android:id="@+id/songDesc">
             <CustomAttribute
                 motion:attributeName="textColor"
-                motion:customColorValue="@color/black" />
+                motion:customColorValue="@color/text2_color" />
         </Constraint>
 
         <Constraint
@@ -172,74 +197,37 @@
             >
             <CustomAttribute
                 motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@color/purple_700"/>
+                motion:customColorValue="@color/white"/>
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/titleText"
+            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            motion:transitionEasing="linear" >
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white"/>
         </Constraint>
         <Constraint
-            android:id="@+id/titleText"
-            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            motion:transitionEasing="linear" />
+            android:id="@+id/skipNextButton"
+            >
+            <PropertySet
+                android:visibility="visible"/>
+        </Constraint>
         <Constraint
-            android:id="@+id/titleText"
-            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            motion:transitionEasing="linear" />
-        <Constraint
-            android:id="@+id/titleText"
-            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            motion:transitionEasing="cubic(0.17,0.74,0.8,0.8)" />
-        <Constraint
-            android:id="@+id/titleText"
-            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            motion:transitionEasing="cubic(0.12,1,0.8,0.8)" />
-        <Constraint
-            android:id="@+id/titleText"
-            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            motion:transitionEasing="cubic(0.12,1,0.85,0)" />
-        <Constraint
-            android:id="@+id/titleText"
-            motion:layout_constraintEnd_toEndOf="@id/playerViewLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            motion:transitionEasing="cubic(0,1,0.85,0)" />
+            android:id="@+id/skipPreviousButton"
+            >
+            <PropertySet
+                android:visibility="visible"/>
+        </Constraint>
+
 
     </ConstraintSet>
 </MotionScene>

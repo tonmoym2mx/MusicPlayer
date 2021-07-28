@@ -18,5 +18,5 @@ val appModule = module {
 }
 val viewModelModule = module {
     viewModel { MusicListViewModel(get()) }
-    viewModel { MainActivityViewModel(get()) }
+    viewModel { MainActivityViewModel(get(),get()) }
 }
