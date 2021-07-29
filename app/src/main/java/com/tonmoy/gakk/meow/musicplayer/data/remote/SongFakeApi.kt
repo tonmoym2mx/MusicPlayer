@@ -6,7 +6,7 @@ import kotlinx.coroutines.delay
 class SongFakeApi {
     suspend fun fetchSongs(): List<Song> {
 
-        delay(1000)
+        delay(300)
         return listOf(
             Song(
                 id = 0,
