@@ -33,7 +33,15 @@ class MusicListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBinding()
         setupAdapter()
-        viewModel.subscribe()
+        setupMusic()
+
+
+    }
+
+    private fun setupMusic() {
+        if(viewModel.currentSong.value == null){
+            viewModel.subscribe()
+        }
     }
 
     private fun setupAdapter() {
@@ -51,6 +59,11 @@ class MusicListFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+    }
+
+    override fun onDestroy() {
+        viewModel.unSubscribe()
+        super.onDestroy()
     }
 
 

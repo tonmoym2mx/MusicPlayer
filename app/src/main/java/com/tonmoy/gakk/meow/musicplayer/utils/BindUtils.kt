@@ -1,6 +1,5 @@
 package com.tonmoy.gakk.meow.musicplayer.utils
 
-import android.os.SystemClock
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import android.widget.ImageView
@@ -14,12 +13,11 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tonmoy.gakk.meow.musicplayer.R
-import com.tonmoy.gakk.meow.musicplayer.data.model.PlayerPosition
+import com.tonmoy.gakk.meow.musicplayer.data.model.MusicPosition
 import com.tonmoy.gakk.meow.musicplayer.data.model.Song
 import com.tonmoy.gakk.meow.musicplayer.player.isPlaying
 import com.tonmoy.gakk.meow.musicplayer.player.isPrepare
 import com.tonmoy.gakk.meow.musicplayer.ui.adapter.SongAdapter
-import kotlinx.coroutines.delay
 
 
 @BindingAdapter("nullableText")
@@ -103,33 +101,33 @@ fun ImageView.playbackStatus(playbackStatus:PlaybackStateCompat?=null){
     }
 }
 
-@BindingAdapter("playerPosition")
-fun SeekBar.playerPosition(playerPosition:PlayerPosition?=null){
-    if(playerPosition!=null){
-        if(playerPosition.duration?:0 >=0){
-            this.max = playerPosition.duration?.toInt()?:0
+@BindingAdapter("musicPosition")
+fun SeekBar.playerPosition(musicPosition:MusicPosition?=null){
+    if(musicPosition!=null){
+        if(musicPosition.duration?:0 >=0){
+            this.max = musicPosition.duration?.toInt()?:0
         }
-        if(playerPosition.currentPosition?:0 >=0){
-            this.progress = playerPosition.currentPosition?.toInt()?:0
+        if(musicPosition.currentPosition?:0 >=0){
+            this.progress = musicPosition.currentPosition?.toInt()?:0
         }
-        if(playerPosition.bufferPosition?:0 >=0){
-            this.secondaryProgress = playerPosition.bufferPosition?.toInt()?:0
+        if(musicPosition.bufferPosition?:0 >=0){
+            this.secondaryProgress = musicPosition.bufferPosition?.toInt()?:0
         }
 
 
     }
 }
 @BindingAdapter("durationTime")
-fun TextView.durationTime(playerPosition:PlayerPosition?=null){
-    playerPosition?.let {
+fun TextView.durationTime(musicPosition:MusicPosition?=null){
+    musicPosition?.let {
         if(it.duration?:0>=0) {
             this.text = it.durationTimeLabel()
         }
     }
 }
 @BindingAdapter("currentTime")
-fun TextView.currentTime(playerPosition:PlayerPosition?=null){
-    playerPosition?.let {
+fun TextView.currentTime(musicPosition:MusicPosition?=null){
+    musicPosition?.let {
         if(it.currentPosition?:0>=0) {
             this.text = it.currentPositionTimeLabel()
         }
@@ -143,7 +141,7 @@ fun ProgressBar.isLoading(isLoading: Boolean?=null){
         this.visibility = View.GONE
     }
 }
-fun SeekBar.toPlayerPosition(): PlayerPosition = PlayerPosition(currentPosition = this.progress.toLong(),
+fun SeekBar.toPlayerPosition(): MusicPosition = MusicPosition(currentPosition = this.progress.toLong(),
      bufferPosition = this.secondaryProgress.toLong(),
      duration = this.max.toLong())
 

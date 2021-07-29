@@ -206,7 +206,7 @@
             android:progressTint="@color/green"
             android:thumbTint="@color/green"
             android:progress="0"
-            playerPosition = "@{viewModel.playerPosition}"
+            musicPosition = "@{viewModel.musicPositionLiveData}"
             app:layout_constraintBottom_toTopOf="@+id/songCurrentTime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -218,7 +218,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="56dp"
             android:text="@string/_0_0"
-            currentTime="@{viewModel.playerPosition}"
+            currentTime="@{viewModel.musicPositionLiveData}"
             android:textColor="@color/text3_color"
             app:layout_constraintBottom_toTopOf="@+id/playButton"
             app:layout_constraintStart_toStartOf="parent" />
@@ -229,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@string/_0_0"
-            durationTime="@{viewModel.playerPosition}"
+            durationTime="@{viewModel.musicPositionLiveData}"
             android:textColor="@color/text3_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekBar" />
@@ -248,6 +248,7 @@
             app:layout_constraintEnd_toEndOf="@id/playerViewLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

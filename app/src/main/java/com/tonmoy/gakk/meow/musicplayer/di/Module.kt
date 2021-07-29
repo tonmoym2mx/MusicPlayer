@@ -10,10 +10,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    single { exoPlayer(get()) }
-    single { dataFactory(get()) }
-    single { SongFakeApi() }
-    single { MusicServiceConnection(get()) }
+    factory { exoPlayer(get()) }
+    factory { dataFactory(get()) }
+    factory { SongFakeApi() }
+    factory { MusicServiceConnection(get()) }
 
 }
 val viewModelModule = module {

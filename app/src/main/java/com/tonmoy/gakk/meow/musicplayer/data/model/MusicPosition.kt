@@ -2,7 +2,7 @@ package com.tonmoy.gakk.meow.musicplayer.data.model
 
 import java.io.Serializable
 
-data class PlayerPosition(
+data class MusicPosition(
     val currentPosition:Long?=0,
     val bufferPosition:Long?=0,
     val duration:Long?=0,

@@ -8,32 +8,58 @@
             type="com.tonmoy.gakk.meow.musicplayer.ui.fragment.music.MusicListViewModel" />
     </data>
 
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     tools:context=".ui.fragment.music.MusicListFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:title="@string/app_name"
+
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/songRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        songsList="@{viewModel.songListLiveData}"
         currentSong="@{viewModel.currentSong}"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        songsList="@{viewModel.songListLiveData}"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="100dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:listitem="@layout/row_song" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
+        isLoading="@{viewModel.isLoading}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:indeterminateTint="@color/green"
-        isLoading="@{viewModel.isLoading}"
-        android:layout_gravity="center"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

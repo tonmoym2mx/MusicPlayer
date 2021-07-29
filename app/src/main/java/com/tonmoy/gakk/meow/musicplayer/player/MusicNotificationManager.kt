@@ -48,6 +48,10 @@ class MusicNotificationManager(
         notificationManager.setPlayer(player)
     }
 
+    fun hideNotification(){
+        notificationManager.setPlayer(null)
+    }
+
     inner  class  MusicMediaDescriptionAdapter : PlayerNotificationManager.MediaDescriptionAdapter {
         override fun getCurrentContentTitle(player: Player): CharSequence {
             return mediaControllerCompat.metadata.description.title.toString()

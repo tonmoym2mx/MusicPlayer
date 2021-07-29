@@ -15,7 +15,7 @@ class MusicListViewModel(private val musicServiceConnection: MusicServiceConnect
      val playbackStatus: MutableLiveData<PlaybackStateCompat> = musicServiceConnection.playbackState
      private val subscriptionCallback:SubscriptionCallback = SubscriptionCallback()
      val songListLiveData: MutableLiveData<List<Song>>  by lazy { MutableLiveData<List<Song>>() }
-     val currentSong: MutableLiveData<Song> = musicServiceConnection.currentPlayingSong
+     val currentSong: MutableLiveData<Song?> = musicServiceConnection.currentPlayingSong
      val isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
 
 
@@ -23,7 +23,7 @@ class MusicListViewModel(private val musicServiceConnection: MusicServiceConnect
           isLoading.postValue(true)
           musicServiceConnection.mediaBrowser.subscribe("root",subscriptionCallback)
      }
-     private fun unSubscribe(){
+     fun unSubscribe(){
           musicServiceConnection.mediaBrowser.unsubscribe("root",subscriptionCallback)
      }
      fun changeMusic(song: Song){
