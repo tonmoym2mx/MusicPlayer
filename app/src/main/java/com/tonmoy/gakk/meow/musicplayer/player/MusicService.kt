@@ -34,11 +34,11 @@ class MusicService : MediaBrowserServiceCompat() {
 
     override fun onCreate() {
         super.onCreate()
-
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this,0,intent,0)
+        val activityIntent = packageManager?.getLaunchIntentForPackage(packageName)?.let {
+            PendingIntent.getActivity(this, 0, it, 0)
+        }
         session = MediaSessionCompat(this, MEDIA_SESSION_TAG).apply {
-            setSessionActivity(pendingIntent)
+            setSessionActivity(activityIntent)
             isActive = true
         }
         val stateBuilder = PlaybackStateCompat.Builder()
