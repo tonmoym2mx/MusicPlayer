@@ -201,8 +201,8 @@
             android:layout_height="15dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
-            android:progressTint="@color/colorPrimary"
-            android:thumbTint="@color/colorPrimary"
+            android:progressTint="@color/green"
+            android:thumbTint="@color/green"
             android:progress="0"
             playerPosition = "@{viewModel.playerPosition}"
             app:layout_constraintBottom_toTopOf="@+id/songCurrentTime"
@@ -246,7 +246,6 @@
             app:layout_constraintEnd_toEndOf="@id/playerViewLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

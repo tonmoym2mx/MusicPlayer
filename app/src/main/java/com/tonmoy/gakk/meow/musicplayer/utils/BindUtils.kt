@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tonmoy.gakk.meow.musicplayer.R
@@ -57,9 +58,35 @@ fun ImageView.imageUrl(imageUrl:String?=null){
 @BindingAdapter("isPlaying")
 fun TextView.isPlaying(isPlaying:Boolean?=null){
     if(isPlaying== true){
-        this.setTextColor(context.getColor(R.color.green))
+        this.setTextColor(context.getColor(R.color.white))
     }else{
         this.setTextColor(context.getColor(R.color.text1_color))
+    }
+}
+@BindingAdapter("isPlayingCard")
+fun CardView.isPlayingCard(isPlaying:Boolean?=null){
+    if(isPlaying== true){
+        this.setCardBackgroundColor(context.getColor(R.color.card_color))
+    }else{
+        this.setCardBackgroundColor(context.getColor(android.R.color.transparent))
+    }
+}
+
+@BindingAdapter("isPrepareAnimation")
+fun LottieAnimationView.isPrepareAnimation(isPrepare:Boolean?=null){
+    if(isPrepare== true){
+        this.visibility = View.VISIBLE
+    }else{
+        this.visibility = View.GONE
+    }
+}
+@BindingAdapter("isPlayingAnimation")
+fun LottieAnimationView.isPlayingAnimation(isPlaying:Boolean?=null){
+    if(isPlaying== true){
+        this.visibility = View.VISIBLE
+        this.playAnimation()
+    }else{
+        this.visibility = View.GONE
     }
 }
 @BindingAdapter("playbackStatus")

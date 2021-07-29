@@ -22,13 +22,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.updatePlayerPosition()
     }
     private fun setupUi() {
-       binding.imageButton.setOnClickListener {
-           binding.mainContainer.transitionToStart()
-       }
+        binding.imageButton.setOnClickListener {
+            binding.mainContainer.transitionToStart()
+        }
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(fromUser) {
+                if (fromUser) {
                     viewModel.updatePlayerPosition(seekBar?.toPlayerPosition())
                 }
             }

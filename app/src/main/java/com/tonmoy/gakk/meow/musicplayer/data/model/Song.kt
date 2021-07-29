@@ -13,6 +13,7 @@ data class Song(
     var subTitle:String? = null,
     var thumbnail:String? = null,
     var songUrl:String?= null,
+    var isPrepare:Boolean? = false,
     var isPlaying:Boolean? = false
 ):Serializable{
     fun toPlayerMediaItem() = MediaItem.Builder()
@@ -30,16 +31,6 @@ data class Song(
             .build()
         return MediaBrowserCompat.MediaItem(description,MediaBrowserCompat.MediaItem.FLAG_PLAYABLE)
     }
-
-    /*override fun equals(other: Any?): Boolean {
-        if(other is Song){
-            return (other.isPlaying?.equals(this.isPlaying) == true)
-                    && (other.title?.equals(this.title) == true)
-                    && (other.subTitle?.equals(this.subTitle) == true)
-                    && (other.id?.equals(this.id) == true)
-        }
-        return false
-    }*/
 
 }
 

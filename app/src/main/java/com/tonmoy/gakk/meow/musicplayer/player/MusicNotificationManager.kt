@@ -1,14 +1,19 @@
 package com.tonmoy.gakk.meow.musicplayer.player
 
+import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
+import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.exoplayer2.ControlDispatcher
+import com.google.android.exoplayer2.DefaultControlDispatcher
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.tonmoy.gakk.meow.musicplayer.R
@@ -32,8 +37,12 @@ class MusicNotificationManager(
             .apply { this.setNotificationListener(notificationListener) }
             .build().apply {
                 setSmallIcon(R.drawable.ic_launcher_foreground)
+                setUseStopAction(false)
+                setControlDispatcher(DefaultControlDispatcher(0L,0L))
                 setMediaSessionToken(token)
             }
+
+        notificationManager.setColor(context.getColor(R.color.white))
     }
     fun showNotification(player: Player) {
         notificationManager.setPlayer(player)

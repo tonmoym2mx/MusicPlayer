@@ -128,7 +128,7 @@
             >
             <CustomAttribute
                 motion:attributeName="backgroundColor"
-                motion:customColorValue="@color/purple_700" />
+                motion:customColorValue="@color/colorPrimary" />
         </Constraint>
         <Constraint
             android:id="@+id/songCurrentTime"
@@ -191,13 +191,13 @@
             android:id="@+id/songName">
             <CustomAttribute
                 motion:attributeName="textColor"
-                motion:customColorValue="@color/text1_color" />
+                motion:customColorValue="@color/white" />
         </Constraint>
         <Constraint
             android:id="@+id/songDesc">
             <CustomAttribute
                 motion:attributeName="textColor"
-                motion:customColorValue="@color/text2_color" />
+                motion:customColorValue="@color/white" />
         </Constraint>
 
         <Constraint

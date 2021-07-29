@@ -52,7 +52,7 @@ class MusicServiceConnection(private val context: Context) {
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {
             super.onMetadataChanged(metadata)
-            currentPlayingSong.postValue(metadata?.toSong())
+            currentPlayingSong.postValue(metadata?.toSong().apply {  })
         }
     }
 

@@ -1,6 +1,7 @@
 package com.tonmoy.gakk.meow.musicplayer.ui.fragment.music
 
 import android.support.v4.media.MediaBrowserCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.google.android.exoplayer2.Player
@@ -9,8 +10,9 @@ import com.tonmoy.gakk.meow.musicplayer.player.MusicServiceConnection
 import com.tonmoy.gakk.meow.musicplayer.player.toSongList
 import kotlinx.coroutines.flow.flow
 
-class MusicListViewModel(val musicServiceConnection: MusicServiceConnection) : ViewModel() {
+class MusicListViewModel(private val musicServiceConnection: MusicServiceConnection) : ViewModel() {
 
+     val playbackStatus: MutableLiveData<PlaybackStateCompat> = musicServiceConnection.playbackState
      private val subscriptionCallback:SubscriptionCallback = SubscriptionCallback()
      val songListLiveData: MutableLiveData<List<Song>>  by lazy { MutableLiveData<List<Song>>() }
      val currentSong: MutableLiveData<Song> = musicServiceConnection.currentPlayingSong

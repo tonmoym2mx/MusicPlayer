@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.tonmoy.gakk.meow.musicplayer.databinding.MusicListFragmentBinding
+import com.tonmoy.gakk.meow.musicplayer.player.isPlaying
 import com.tonmoy.gakk.meow.musicplayer.ui.adapter.SongAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.java.KoinJavaComponent.inject
@@ -40,6 +41,9 @@ class MusicListFragment : Fragment() {
         binding.songRecyclerView.adapter = songAdapter
         songAdapter.setOnSongSelectListener {
             viewModel.changeMusic(it)
+        }
+        viewModel.playbackStatus.observe(viewLifecycleOwner){
+            songAdapter.isPlaying(it.isPlaying)
         }
     }
 

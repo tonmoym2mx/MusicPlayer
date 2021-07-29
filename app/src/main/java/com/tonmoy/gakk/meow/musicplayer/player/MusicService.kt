@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat.MediaItem
 import androidx.media.MediaBrowserServiceCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.tonmoy.gakk.meow.musicplayer.config.AppConfig.MEDIA_SESSION_TAG
@@ -37,10 +38,19 @@ class MusicService : MediaBrowserServiceCompat() {
             setSessionActivity(pendingIntent)
             isActive = true
         }
+        val stateBuilder = PlaybackStateCompat.Builder()
+            .setActions(PlaybackStateCompat.ACTION_PLAY
+                    or PlaybackStateCompat.ACTION_PLAY_PAUSE
+            )
+        session.setPlaybackState(stateBuilder.build())
+
         sessionToken = session.sessionToken
+
         mediaSessionConnector = MediaSessionConnector(session)
         mediaSessionConnector.setPlayer(exoPlayer)
         mediaSessionConnector.setQueueNavigator(MusicQueueNavigator(session,songs))
+
+
 
         val musicPlaybackPreparer = MusicPlaybackPreparer{
             changeSong(it)
